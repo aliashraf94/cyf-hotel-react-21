@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 
 let SearchResults = props => {
   let diffInDays = (checkOutDate, checkInDate) => {
-    var a = moment(checkOutDate);
-    var b = moment(checkInDate);
+    let a = moment(checkOutDate);
+    let b = moment(checkInDate);
     return a.diff(b, "days");
+  };
+
+  let [isHighlighted, setIsHighlighted] = useState(false);
+  let hightlightRow = () => {
+    setIsHighlighted(!isHighlighted);
   };
 
   return (
@@ -26,7 +31,10 @@ let SearchResults = props => {
         </thead>
         <tbody>
           {props.results.map(each => (
-            <tr>
+            <tr
+              onClick={hightlightRow}
+              className={isHighlighted ? "table-danger" : ""}
+            >
               <th scope="row">{each.id}</th>
               <td>{each.title}</td>
               <td>{each.firstName}</td>
