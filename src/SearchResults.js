@@ -1,7 +1,13 @@
 import React from "react";
+import moment from "moment";
 
 let SearchResults = props => {
-  console.log(props);
+  let diffInDays = (checkOutDate, checkInDate) => {
+    var a = moment(checkOutDate);
+    var b = moment(checkInDate);
+    return a.diff(b, "days");
+  };
+
   return (
     <div>
       <table class="table">
@@ -15,6 +21,7 @@ let SearchResults = props => {
             <th scope="col">room id</th>
             <th scope="col">check in date</th>
             <th scope="col">check out date</th>
+            <th scope="col">nights</th>
           </tr>
         </thead>
         <tbody>
@@ -28,6 +35,7 @@ let SearchResults = props => {
               <td>{each.roomId}</td>
               <td>{each.checkInDate}</td>
               <td>{each.checkOutDate}</td>
+              <td>{diffInDays(each.checkOutDate, each.checkInDate)}</td>
             </tr>
           ))}
         </tbody>
