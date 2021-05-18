@@ -1,18 +1,7 @@
 import React, { useState } from "react";
-import moment from "moment";
+import Customer from "./Customer";
 
 let SearchResults = props => {
-  let diffInDays = (checkOutDate, checkInDate) => {
-    let a = moment(checkOutDate);
-    let b = moment(checkInDate);
-    return a.diff(b, "days");
-  };
-
-  let [isHighlighted, setIsHighlighted] = useState(false);
-  let hightlightRow = () => {
-    setIsHighlighted(!isHighlighted);
-  };
-
   return (
     <div>
       <table class="table">
@@ -31,20 +20,7 @@ let SearchResults = props => {
         </thead>
         <tbody>
           {props.results.map(each => (
-            <tr
-              onClick={hightlightRow}
-              className={isHighlighted ? "table-danger" : ""}
-            >
-              <th scope="row">{each.id}</th>
-              <td>{each.title}</td>
-              <td>{each.firstName}</td>
-              <td>{each.surname}</td>
-              <td>{each.email}</td>
-              <td>{each.roomId}</td>
-              <td>{each.checkInDate}</td>
-              <td>{each.checkOutDate}</td>
-              <td>{diffInDays(each.checkOutDate, each.checkInDate)}</td>
-            </tr>
+            <Customer each={each} />
           ))}
         </tbody>
       </table>

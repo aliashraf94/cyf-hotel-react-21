@@ -1,7 +1,10 @@
 import React from "react";
 import SearchButton from "./SearchButton";
 
-const Search = () => {
+const Search = props => {
+  const onChange = () => {
+    props.search(document.getElementById("customerName").value);
+  };
   return (
     <div className="search">
       <div className="page-header">
@@ -16,7 +19,8 @@ const Search = () => {
                 type="text"
                 id="customerName"
                 className="form-control"
-                placeholder="Customer name"
+                placeholder="Customer first name"
+                onChange={onChange}
               />
               <SearchButton />
             </div>
