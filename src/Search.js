@@ -7,6 +7,12 @@ const Search = props => {
     setSearchInput(event.target.value);
     console.log(`Previous value: ${searchInput}`);
   };
+
+  const handleSubmit = event => {
+    props.search(searchInput);
+    event.preventDefault();
+  };
+
   // const onChange = () => {
   //   props.search(document.getElementById("customerName").value);
   // };
@@ -17,7 +23,7 @@ const Search = props => {
       </div>
       <div className="row search-wrapper">
         <div className="col">
-          <form className="form-group search-box">
+          <form className="form-group search-box" onSubmit={handleSubmit}>
             <label htmlFor="customerName">Customer name</label>
             <div className="search-row">
               <input
